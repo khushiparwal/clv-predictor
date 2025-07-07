@@ -43,6 +43,7 @@ The input must be an Excel file (.xlsx) containing the following columns (typica
 •	Customer ID
 
 •	Country
+
 A sample file (adv_merge_output.xlsx) is available for reference for testing.
 ________________________________________
 Technologies Used
