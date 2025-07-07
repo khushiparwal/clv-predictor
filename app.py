@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+from io import BytesIO
 
 with open("model.pkl", "rb") as file:
     model = pickle.load(file)
