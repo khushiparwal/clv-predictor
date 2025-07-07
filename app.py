@@ -36,10 +36,13 @@ if uploaded_file is not None:
         st.subheader("Predicted CLV Segments")
         st.write(data)
 
-        output_excel = data.to_excel(index=False)
+        output = BytesIO()
+        data.to_excel(output, index=False, engine='openpyxl')
+        output.seek(0)
+
         st.download_button(
             label="Download Results as Excel",
-            data=output_excel,
+            data=output,
             file_name="clv_predictions.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
