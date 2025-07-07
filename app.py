@@ -19,6 +19,15 @@ if uploaded_file is not None:
         st.write(data.head())
         drop_cols = ["Invoice", "StockCode", "Description", "InvoiceDate", "Country", "LTVCluster", "m6_Revenue", "Segment","Revenue_x", "Revenue_y"]
         features = data.drop(columns=drop_cols, errors="ignore")
+        expected_cols = ['CustomerID', 'Recency', 'RecencyCluster', 'Frequency', 'FrequencyCluster',
+                 'Revenue', 'RevenueCluster', 'OverallScore',
+                 'Segment_High-Value', 'Segment_Low-Value', 'Segment_Mid-Value']
+
+        for col in expected_cols:
+            if col not in features.columns:
+                features[col] = 0  # create missing with zeros
+
+        features = features[expected_cols] 
         st.write("Features used for prediction:", features.columns.tolist())
         features = features.select_dtypes(include=['number', 'bool'])
         preds = model.predict(features)
