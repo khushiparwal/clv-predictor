@@ -17,7 +17,10 @@ if uploaded_file is not None:
         data = pd.read_excel(uploaded_file)
         st.subheader("Preview of Uploaded Data")
         st.write(data.head())
-        features = data.drop(columns=["LTVCluster", "m6_Revenue"], errors="ignore")
+        drop_cols = ["Invoice", "StockCode", "Description", "InvoiceDate", "Country", "LTVCluster", "m6_Revenue"]
+        features = data.drop(columns=drop_cols, errors="ignore")
+        st.write("Features used for prediction:", features.columns.tolist())
+
         preds = model.predict(features)
         data["Predicted_LTVCluster"] = preds
 
